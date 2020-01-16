@@ -1,17 +1,17 @@
-const numberButtons = document.querySelectorAll(".number-keys [data-number]");
-const operations = document.querySelectorAll("[data-operation]");
-const scientificFunctions = document.querySelectorAll(
-	".function-keys [data-function]"
+const numberButtons = document.querySelectorAll('.number-keys [data-number]');
+const operations = document.querySelectorAll('[data-operation]');
+const scientificOperations = document.querySelectorAll(
+	'.function-keys [data-science]'
 );
-const allClear = document.querySelector("[data-clear]");
-const deleteButton = document.querySelector("[data-delete]");
-const equals = document.querySelector("[data-equals]");
-const answer = document.querySelector("[data-answer]");
+const allClear = document.querySelector('[data-clear]');
+const deleteButton = document.querySelector('[data-delete]');
+const equals = document.querySelector('[data-equals]');
+const answer = document.querySelector('[data-answer]');
 const previousOperandTextElement = document.querySelector(
-	"[data-previousOperand]"
+	'[data-previousOperand]'
 );
 const currentOperandTextElement = document.querySelector(
-	"[data-currentOperand]"
+	'[data-currentOperand]'
 );
 
 class Calculator {
@@ -21,34 +21,77 @@ class Calculator {
 		this.clear();
 	}
 	clear() {
-		this.currentOperand = "";
-		this.previousOperand = "";
+		this.currentOperand = '';
+		this.previousOperand = '';
 		this.operation = undefined;
 	}
 	delete() {
 		this.currentOperand = this.currentOperand.toString().slice(0, -1);
 	}
 	appendNumber(number) {
-		if (number === "." && this.currentOperand.includes(".")) return;
+		if (number === '.' && this.currentOperand.includes('.')) return;
 		this.currentOperand = this.currentOperand.toString() + number.toString();
 	}
 	chooseOperation(operation) {
-		if (this.currentOperand === "") return;
-		if (this.previousOperand !== "") {
+		if (this.currentOperand === '') return;
+		if (this.previousOperand !== '') {
 			this.compute();
 		}
 		this.operation = operation;
 		this.previousOperand = this.currentOperand;
-		this.currentOperand = "";
+		this.currentOperand = '';
 	}
-	chooseFunction(functions) {
-		if (this.currentOperand === "") return;
-		if (this.previousOperand !== "") {
-			this.science();
+	chooseScientificFunction(scientific) {
+		if (this.currentOperand === '') return;
+		if (this.previousOperand !== '') {
+			this.calculate();
 		}
-		this.functions = functions;
+		this.scientific = scientific;
 		this.previousOperand = this.currentOperand;
-		this.currentOperand = "";
+	}
+
+	calculate() {
+		let calculation;
+		let inCalc = parseFloat(this.currentOperand);
+
+		if (isNaN(inCalc)) return;
+		switch (this.scientific) {
+			case 'sin':
+				calculation = Math.sin(inCalc);
+				break;
+			case 'cos':
+				calculation = Math.cos(inCalc);
+				break;
+			case 'hyp':
+				calculation = Math.hypot(inCalc);
+				break;
+			case '√':
+				calculation = Math.sqrt(inCalc);
+				break;
+			case 'log':
+				calculation = Math.log10(inCalc);
+				break;
+			case 'log2':
+				calculation = Math.log2(inCalc);
+				break;
+			case 'tan':
+				calculation = Math.tan(inCalc);
+				break;
+			case 'ln':
+				calculation = Math.log(inCalc);
+				break;
+			case 'x-1':
+				calculation = inCalc ** -1;
+				break;
+			case 'x2':
+				calculation = inCalc ** 2;
+				break;
+			case 'π':
+				calculation = inCalc * 3.14159;
+				break;
+		}
+		this.currentOperand = calculation;
+		this.scientific = undefined;
 	}
 	compute() {
 		let computation;
@@ -56,19 +99,19 @@ class Calculator {
 		let current = parseFloat(this.currentOperand);
 		if (isNaN(prev) || isNaN(current)) return;
 		switch (this.operation) {
-			case "+":
+			case '+':
 				computation = prev + current;
 				break;
-			case "x":
+			case 'x':
 				computation = prev * current;
 				break;
-			case "-":
+			case '-':
 				computation = prev - current;
 				break;
-			case "÷":
+			case '÷':
 				computation = prev / current;
 				break;
-			case "x10x":
+			case 'x10x':
 				computation = prev * 10 ** current;
 				break;
 			default:
@@ -76,46 +119,18 @@ class Calculator {
 		}
 		this.currentOperand = computation;
 		this.operation = undefined;
-		this.previousOperand = "";
-	}
-	science() {
-		let computate;
-		let current = parseFloat(this.previousOperand);
-		switch (this.functions) {
-			case "sin":
-				computate = Math.sin(current);
-				break;
-			case "cos":
-				computate = Math.cos(current);
-				break;
-			case "tan":
-				computate = Math.tan(current);
-				break;
-			case "hyp":
-				computate = Math.hypot(current);
-				break;
-			case "log":
-				computate = Math.log10;
-				break;
-			case "x":
-				computate = 1 / current;
-				break;
-			default:
-				return;
-		}
-		this.currentOperand = computate;
-		this.functions = undefined;
+		this.previousOperand = '';
 	}
 	getDisplayNumber(number) {
 		const stringNumber = number.toString();
-		const integerDigits = parseFloat(stringNumber.split(".")[0]);
-		const decimalDigits = stringNumber.split(".")[1];
+		const integerDigits = parseFloat(stringNumber.split('.')[0]);
+		const decimalDigits = stringNumber.split('.')[1];
 
 		let integerDisplay;
 		if (isNaN(integerDigits)) {
-			integerDisplay = "";
+			integerDisplay = '';
 		} else {
-			integerDisplay = integerDigits.toLocaleString("en", {
+			integerDisplay = integerDigits.toLocaleString('en', {
 				maximumFractionDigits: 0
 			});
 		}
@@ -125,7 +140,6 @@ class Calculator {
 			return integerDisplay;
 		}
 	}
-	getFunction(funct) {}
 	updateDisplay() {
 		this.currentOperandTextElement.innerText = this.getDisplayNumber(
 			this.currentOperand
@@ -133,7 +147,7 @@ class Calculator {
 		if (this.operation != null) {
 			this.previousOperandTextElement.innerText = `${this.previousOperand} ${this.operation}`;
 		} else {
-			this.previousOperandTextElement.innerText = "";
+			this.previousOperandTextElement.innerText = '';
 		}
 	}
 }
@@ -142,35 +156,35 @@ const calculator = new Calculator(
 	currentOperandTextElement
 );
 numberButtons.forEach(button => {
-	button.addEventListener("click", () => {
+	button.addEventListener('click', () => {
 		calculator.appendNumber(button.innerText);
 		calculator.updateDisplay();
 	});
 });
 operations.forEach(button => {
-	button.addEventListener("click", () => {
+	button.addEventListener('click', () => {
 		calculator.chooseOperation(button.innerText);
 		calculator.updateDisplay();
 	});
 });
-scientificFunctions.forEach(button => {
-	button.addEventListener("click", () => {
-		calculator.chooseFunction(button.innerText);
+scientificOperations.forEach(button => {
+	button.addEventListener('click', event => {
+		calculator.chooseScientificFunction(button.innerText);
 		calculator.updateDisplay();
 	});
 });
-allClear.addEventListener("click", () => {
+allClear.addEventListener('click', () => {
 	calculator.clear();
 	calculator.updateDisplay();
 });
-equals.addEventListener("click", () => {
+equals.addEventListener('click', () => {
 	calculator.compute();
 	calculator.updateDisplay();
 });
-deleteButton.addEventListener("click", () => {
+deleteButton.addEventListener('click', () => {
 	calculator.delete();
 	calculator.updateDisplay();
 });
-answer.addEventListener("click", () => {
+answer.addEventListener('click', () => {
 	calculator.computation();
 });
