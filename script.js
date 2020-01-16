@@ -57,10 +57,10 @@ class Calculator {
 		if (isNaN(inCalc)) return;
 		switch (this.scientific) {
 			case 'sin':
-				calculation = Math.sin(inCalc);
+				calculation = Math.sin((inCalc * Math.PI) / 180);
 				break;
 			case 'cos':
-				calculation = Math.cos(inCalc);
+				calculation = Math.cos((inCalc * Math.PI) / 180);
 				break;
 			case 'hyp':
 				calculation = Math.hypot(inCalc);
@@ -75,7 +75,7 @@ class Calculator {
 				calculation = Math.log2(inCalc);
 				break;
 			case 'tan':
-				calculation = Math.tan(inCalc);
+				calculation = Math.tan((inCalc * Math.PI) / 180);
 				break;
 			case 'ln':
 				calculation = Math.log(inCalc);
@@ -87,7 +87,7 @@ class Calculator {
 				calculation = inCalc ** 2;
 				break;
 			case 'π':
-				calculation = inCalc * 3.14159;
+				calculation = inCalc * Math.PI;
 				break;
 		}
 		this.currentOperand = calculation;
