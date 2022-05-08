@@ -1,86 +1,89 @@
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
-	font-family: "Courier New", Courier, monospace;
-	font-weight: normal;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: normal;
 }
 body {
-	padding: 0;
-	margin: 0;
-	background-color: white;
-	overflow: hidden;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  overflow: hidden;
 }
 
 .container {
-	background-color: white;
-	display: grid;
-	justify-content: center;
-	align-content: center;
-	min-height: 100vh;
-	padding: 20px 0;
-	word-wrap: break-word;
-	word-break: break-all;
-	border: 5px solid grey;
+  background-color: white;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  min-height: 100vh;
+  padding: 20px 0;
+  word-wrap: break-word;
+  word-break: break-all;
+  border: 5px solid grey;
 }
 .output {
-	background-color: rgba(54, 134, 90, 0.5);
-	display: flex;
-	align-items: flex-end;
-	justify-content: space-around;
-	flex-direction: column;
-	max-height: 50px;
-	min-height: 50px;
-	padding: 15px 10px;
-	border-radius: 5px;
+  background-color: rgba(54, 134, 90, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  /* flex-direction: column; */
+  max-height: 50px;
+  min-height: 50px;
+  padding: 15px 10px;
+  border-radius: 5px;
+}
+.output span:last-child {
+  margin-left: 10px;
 }
 .time-screen {
-	float: right;
-	background-color: rgb(99, 83, 39);
-	padding: 20px 60px;
-	margin: 10px 10px 0 0;
-	border-radius: 5px;
+  float: right;
+  background-color: rgb(99, 83, 39);
+  padding: 20px 60px;
+  margin: 10px 10px 0 0;
+  border-radius: 5px;
 }
 .container .buttons .function-keys {
-	display: grid;
-	grid-template-columns: repeat(6, 50px);
-	padding: 10px 0;
+  display: grid;
+  grid-template-columns: repeat(6, 50px);
+  padding: 10px 0;
 }
 .body {
-	border: 10px solid rgba(196, 189, 189, 0.829);
-	border-radius: 15px 15px 50px 50px;
-	padding: 0 0 20px 0;
-	background-color: rgba(196, 189, 189, 0.829);
+  border: 10px solid rgba(196, 189, 189, 0.829);
+  border-radius: 15px 15px 50px 50px;
+  padding: 0 0 20px 0;
+  background-color: rgba(196, 189, 189, 0.829);
 }
 .function-keys > button {
-	cursor: pointer;
-	outline: none;
-	background-color: rgba(0, 0, 0, 0.9);
-	color: white;
-	border-radius: 10px 10px 20px 20px;
-	margin-bottom: 10px;
+  cursor: pointer;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  border-radius: 10px 10px 20px 20px;
+  margin-bottom: 10px;
 }
 .function-keys > button:hover {
-	background-color: burlywood;
+  background-color: burlywood;
 }
 
 .number-keys > button:hover {
-	background-color: burlywood;
+  background-color: burlywood;
 }
 .container .buttons .number-keys {
-	display: grid;
-	grid-template-columns: repeat(5, 60px);
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
 }
 .number-keys > button {
-	color: black;
-	font-weight: bold;
-	font-size: 16px;
-	background-color: white;
-	border-radius: 10px 10px 20px 20px;
-	cursor: pointer;
-	outline: none;
-	margin-bottom: 10px;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: white;
+  border-radius: 10px 10px 20px 20px;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 10px;
 }
 .number-keys .special {
-	background-color: rgba(220, 15, 15, 0.7);
+  background-color: rgba(220, 15, 15, 0.7);
 }
